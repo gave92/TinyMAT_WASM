@@ -1,0 +1,16 @@
+C++/Windows:
+
+mkdir build
+cd build
+cmake .. -G "Visual Studio 17 2022" -DTinyMAT_QT5_SUPPORT=OFF -DTinyMAT_OPENCV_SUPPORT=OFF -DTinyMAT_BUILD_SHARED_LIBS=ON -DTinyMAT_BUILD_STATIC_LIBS=ON
+cmake --build . --config "Release"
+
+
+WASM:
+
+Uncomment "//#define TINYMAT_WRITE_VIA_MEMORY" from "tinymatwriter.cpp"
+Rename "tinymatwriter_export.h.bak" -> "tinymatwriter_export.h"
+Run "emsdk_env.bat" from "emsdk" folder
+cd to "src" folder
+emcc -O3 -s MAIN_MODULE=1 -s EXPORT_NAME=tinymatwriter -s MODULARIZE=1 tinymatwriter.cpp -o tinymatwriter.js
+Add "Module["asm"] = wasmExports;" to "tinymatwriter.js" after "function receiveInstance/1024"

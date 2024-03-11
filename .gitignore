@@ -37,3 +37,6 @@
 *.d
 *.user
 /*.Gy5584
+
+# Build files
+build/*

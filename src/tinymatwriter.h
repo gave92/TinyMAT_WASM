@@ -117,7 +117,7 @@ struct TinyMATWriterFile; // forward
     \return \c TRUE if the file is OK and can be written to or \c FALSE
 
   */
-TINYMATWRITER_EXPORT int TinyMATWriter_fOK(const TinyMATWriterFile* mat);
+extern "C" TINYMATWRITER_EXPORT int TinyMATWriter_fOK(const TinyMATWriterFile* mat);
 
 /*! \brief create a new MAT file
     \ingroup tinymatwriter
@@ -130,7 +130,7 @@ TINYMATWRITER_EXPORT int TinyMATWriter_fOK(const TinyMATWriterFile* mat);
     \return a new TinyMATWriterFile pointer on success, or NULL on errors
 
   */
-TINYMATWRITER_EXPORT TinyMATWriterFile* TinyMATWriter_open(const char* filename, const char* description=NULL, size_t bufSize=1024*100);
+extern "C" TINYMATWRITER_EXPORT TinyMATWriterFile* TinyMATWriter_open(const char* filename, const char* description=NULL, size_t bufSize=1024*100);
 
 /*! \brief write a string into a MAT-file
     \ingroup tinymatwriter
@@ -170,7 +170,7 @@ TINYMATWRITER_EXPORT void TinyMATWriter_writeString(TinyMATWriterFile* mat, cons
     \param name variable name for the new array
 
   */
-TINYMATWRITER_EXPORT void TinyMATWriter_writeEmptyMatrix(TinyMATWriterFile* mat, const char* name);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeEmptyMatrix(TinyMATWriterFile* mat, const char* name);
 
 
 
@@ -401,7 +401,6 @@ inline void TinyMATWriter_writeMatrixND_rowmajor(TinyMATWriterFile* mat, const c
     if (freeDat && dat) delete[] dat;
     if (siz) delete[] siz;
 }
-
 
 
 /*! \brief write a N-dimensional matrix with C color channels (e.g. C=3 RGBRGBRGB...) into a MAT-file
@@ -936,20 +935,6 @@ inline  void TinyMATWriter_writeContainerAsColumn(TinyMATWriterFile* mat, const 
   }
 #endif
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*! \brief write a 1-dimensional std::list<std::string> into a MAT-file as a cell array
     \ingroup tinymatwriter
 
@@ -958,7 +943,7 @@ inline  void TinyMATWriter_writeContainerAsColumn(TinyMATWriterFile* mat, const 
     \param data the array to write
 
   */
-TINYMATWRITER_EXPORT void TinyMATWriter_writeStringList(TinyMATWriterFile* mat, const char* name, const std::list<std::string>& data);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeStringList(TinyMATWriterFile* mat, const char* name, const std::list<std::string>& data);
 
 /*! \brief write a 1-dimensional std::vector<std::string> into a MAT-file as a cell array
     \ingroup tinymatwriter
@@ -968,7 +953,7 @@ TINYMATWRITER_EXPORT void TinyMATWriter_writeStringList(TinyMATWriterFile* mat, 
     \param data the array to write
 
   */
-TINYMATWRITER_EXPORT void TinyMATWriter_writeStringVector(TinyMATWriterFile* mat, const char* name, const std::vector<std::string>& data);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeStringVector(TinyMATWriterFile* mat, const char* name, const std::vector<std::string>& data);
 
 /*! \brief write a 1-dimensional std::list<double> into a MAT-file as a 1D matrix
     \ingroup tinymatwriter
@@ -979,7 +964,7 @@ TINYMATWRITER_EXPORT void TinyMATWriter_writeStringVector(TinyMATWriterFile* mat
     \param columnVector if \C true, data is stored as a column vector ... otherwise as a row-vetor
 
   */
-TINYMATWRITER_EXPORT void TinyMATWriter_writeDoubleList(TinyMATWriterFile* mat, const char* name, const std::list<double>& data, bool columnVector=false);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeDoubleList(TinyMATWriterFile* mat, const char* name, const std::list<double>& data, bool columnVector=false);
 
 /*! \brief write a 1-dimensional std::vector<double> into a MAT-file as a 1D matrix
     \ingroup tinymatwriter
@@ -990,7 +975,7 @@ TINYMATWRITER_EXPORT void TinyMATWriter_writeDoubleList(TinyMATWriterFile* mat, 
     \param columnVector if \C true, data is stored as a column vector ... otherwise as a row-vetor
 
   */
-TINYMATWRITER_EXPORT void TinyMATWriter_writeDoubleVector(TinyMATWriterFile* mat, const char* name, const std::vector<double>& data, bool columnVector=false);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeDoubleVector(TinyMATWriterFile* mat, const char* name, const std::vector<double>& data, bool columnVector=false);
 
 
 /*! \brief write a a std::map<std::string,double> into a MAT-file as a struct
@@ -1002,7 +987,7 @@ TINYMATWRITER_EXPORT void TinyMATWriter_writeDoubleVector(TinyMATWriterFile* mat
     \param columnVector if \C true, data is stored as a column vector ... otherwise as a row-vetor
 
   */
-TINYMATWRITER_EXPORT void TinyMATWriter_writeStruct(TinyMATWriterFile* mat, const char* name, const std::map<std::string, double>& data);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeStruct(TinyMATWriterFile* mat, const char* name, const std::map<std::string, double>& data);
 
 
 
@@ -1013,14 +998,14 @@ TINYMATWRITER_EXPORT void TinyMATWriter_writeStruct(TinyMATWriterFile* mat, cons
 \param mat the MAT-file to write into
 \param name variable name for the new array (max. len: 31 characters)
 */
-TINYMATWRITER_EXPORT void TinyMATWriter_startStruct(TinyMATWriterFile *mat, const char *name);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_startStruct(TinyMATWriterFile *mat, const char *name);
 /*! \brief end to write a struct-element
 \ingroup tinymatwriter
 
 \param mat the MAT-file to write into
 \param name struc the structure object to finish
 */
-TINYMATWRITER_EXPORT void TinyMATWriter_endStruct(TinyMATWriterFile* mat);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_endStruct(TinyMATWriterFile* mat);
 
 
 
@@ -1038,7 +1023,7 @@ entires in column-major order with "name" left blanck. Finally close the array b
 TinyMATWriter_endCellArray(). You can nest severall startCellArray/endCellAray-calls.
 
 */
-TINYMATWRITER_EXPORT void TinyMATWriter_startCellArray(TinyMATWriterFile *mat, const char *name, const int32_t* sizes, uint32_t ndims);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_startCellArray(TinyMATWriterFile *mat, const char *name, const int32_t* sizes, uint32_t ndims);
 
 /*! \brief Low-Level-Interface for writing Cell-Arrays: starts a 1D Cell-Array (column)
 \ingroup tinymatwriter
@@ -1053,7 +1038,7 @@ entries with "name" left blanck. Finally close the array by calling TinyMATWrite
 You can nest severall startCellArray/endCellAray-calls.
 
 */
-TINYMATWRITER_EXPORT inline void TinyMATWriter_startCellVectorAsCol(TinyMATWriterFile *mat, const char *name, int32_t nitems) {
+extern "C" TINYMATWRITER_EXPORT inline void TinyMATWriter_startCellVectorAsCol(TinyMATWriterFile *mat, const char *name, int32_t nitems) {
   int32_t dims[2] = { nitems,1 };
   TinyMATWriter_startCellArray(mat, name, dims, 2);
 }
@@ -1070,7 +1055,7 @@ entries with "name" left blanck. Finally close the array by calling TinyMATWrite
 You can nest severall startCellArray/endCellAray-calls.
 
 */
-TINYMATWRITER_EXPORT inline void TinyMATWriter_startCellVectorAsRow(TinyMATWriterFile *mat, const char *name, int32_t nitems) {
+extern "C" TINYMATWRITER_EXPORT inline void TinyMATWriter_startCellVectorAsRow(TinyMATWriterFile *mat, const char *name, int32_t nitems) {
   int32_t dims[2] = { 1,nitems };
   TinyMATWriter_startCellArray(mat, name, dims, 2);
 }
@@ -1088,7 +1073,7 @@ entires in column-major order with "name" left blanck. Finally close the array b
 TinyMATWriter_endCellArray(). You can nest severall startCellArray/endCellAray-calls.
 
 */
-TINYMATWRITER_EXPORT inline void TinyMATWriter_startCellMatrix2D(TinyMATWriterFile *mat, const char *name, int32_t cols, int32_t rows) {
+extern "C" TINYMATWRITER_EXPORT inline void TinyMATWriter_startCellMatrix2D(TinyMATWriterFile *mat, const char *name, int32_t cols, int32_t rows) {
   int32_t dims[2] = { rows,cols };
   TinyMATWriter_startCellArray(mat, name, dims, 2);
 }
@@ -1099,7 +1084,7 @@ TINYMATWRITER_EXPORT inline void TinyMATWriter_startCellMatrix2D(TinyMATWriterFi
 \param mat the MAT-file to write into
 \param name struc the structure object to finish
 */
-TINYMATWRITER_EXPORT void TinyMATWriter_endCellArray(TinyMATWriterFile* mat);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_endCellArray(TinyMATWriterFile* mat);
 
 
 
@@ -1410,6 +1395,20 @@ TINYMATWRITER_EXPORT void TinyMATWriter_writeQVariantMap(TinyMATWriterFile* mat,
 
     This function also releases memory allocated in TinyMATWriter_open() in \a tiff.
  */
-TINYMATWRITER_EXPORT void TinyMATWriter_close(TinyMATWriterFile* mat);
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_close(TinyMATWriterFile* mat);
+
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeMatrixND_rowmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, const int32_t* sizes, uint32_t ndims);
+
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeMatrix2D_rowmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, int32_t cols, int32_t rows);
+
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeString_exp(TinyMATWriterFile* mat, const char* name, const char* data, uint32_t slen);
+
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeMatrixND_colmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, const int32_t* sizes, uint32_t ndims);
+
+extern "C" TINYMATWRITER_EXPORT void TinyMATWriter_writeMatrix2D_colmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, int32_t cols, int32_t rows);
+
+extern "C" TINYMATWRITER_EXPORT long TinyMATWriter_ftell(TinyMATWriterFile* file);
+
+extern "C" TINYMATWRITER_EXPORT uint8_t* TinyMATWriter_data(TinyMATWriterFile* file);
 
 #endif // TINYMATWRITER_H

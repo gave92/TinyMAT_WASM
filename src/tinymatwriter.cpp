@@ -24,6 +24,7 @@
 #include <time.h>
 #include <list>
 #include <algorithm>
+#include <stdexcept>
 
 //#include <iostream>
 
@@ -31,7 +32,7 @@
 
 /** \brief if defined, files are beeing created in a memory buffer and are only written to disk at the end. 
 *          if undefined, the files are written directly to disk, including move operations on disk, which can be a factor 2-3 slower. */
-//#define TINYMAT_WRITE_VIA_MEMORY
+#define TINYMAT_WRITE_VIA_MEMORY
 
 #ifndef __WINDOWS__
 # if defined(WIN32) || defined(WIN64) || defined(_MSC_VER) || defined(_WIN32)
@@ -2115,3 +2116,32 @@ void TinyMATWriter_writeContainerAsRow(TinyMATWriterFile* mat, const char* name,
 
 #endif
 
+void TinyMATWriter_writeMatrixND_rowmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, const int32_t* sizes, uint32_t ndims) {
+	TinyMATWriter_writeMatrixND_rowmajor(mat, name, data_real, sizes, ndims);
+}
+
+void TinyMATWriter_writeMatrix2D_rowmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, int32_t cols, int32_t rows) {
+	int32_t siz[2]={cols, rows};
+    TinyMATWriter_writeMatrixND_rowmajor(mat, name, data_real, siz, 2);
+}
+
+void TinyMATWriter_writeString_exp(TinyMATWriterFile* mat, const char* name, const char* data, uint32_t slen) {
+	TinyMATWriter_writeString(mat, name, data, slen);
+}
+
+void TinyMATWriter_writeMatrixND_colmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, const int32_t* sizes, uint32_t ndims) {
+	TinyMATWriter_writeMatrixND_colmajor(mat, name, data_real, sizes, ndims);
+}
+
+void TinyMATWriter_writeMatrix2D_colmajor_exp_double(TinyMATWriterFile* mat, const char* name, const double* data_real, int32_t cols, int32_t rows) {
+    int32_t siz[2]={rows, cols};
+    TinyMATWriter_writeMatrixND_colmajor(mat, name, data_real, siz, 2);
+}
+
+long TinyMATWriter_ftell(TinyMATWriterFile* file) {
+	return static_cast<long>(file->filedata_current);
+}
+
+uint8_t* TinyMATWriter_data(TinyMATWriterFile* file) {
+	return file->filedata;
+}
