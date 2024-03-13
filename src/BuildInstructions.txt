@@ -12,5 +12,5 @@ Uncomment "//#define TINYMAT_WRITE_VIA_MEMORY" from "tinymatwriter.cpp"
 Rename "tinymatwriter_export.h.bak" -> "tinymatwriter_export.h"
 Run "emsdk_env.bat" from "emsdk" folder
 cd to "src" folder
-emcc -O3 -s MAIN_MODULE=1 -s EXPORT_NAME=tinymatwriter -s MODULARIZE=1 -s INITIAL_MEMORY=512MB tinymatwriter.cpp -o tinymatwriter.js
+emcc -O3 -s MAIN_MODULE=1 -s EXPORT_NAME=tinymatwriter -s MODULARIZE=1 -s MAXIMUM_MEMORY=1024MB -s ALLOW_MEMORY_GROWTH=1 tinymatwriter.cpp -o tinymatwriter.js
 Add "Module["asm"] = wasmExports;" to "tinymatwriter.js" after "function receiveInstance/1024"
